@@ -1,0 +1,27 @@
+{
+  "title": "Operational AI Assurance Framework (OAAF), Version 1.0",
+  "upload_type": "publication",
+  "publication_type": "report",
+  "version": "1.0",
+  "language": "eng",
+  "license": "cc-by-4.0",
+  "creators": [
+    {"name": "Verbovci, Armend"}
+  ],
+  "description": "<p>Most AI assurance effort is spent before a system goes live. Far less addresses the question an operator faces every day once it is running: should this system keep operating, in this form, right now? The Operational AI Assurance Framework (OAAF) adapts the operating regime of aviation safety management systems (accountable owners with real authority, defined degraded modes, occurrence reporting, controlled change and return to service) to AI-enabled systems and AI agents in any sector.</p><p>OAAF is deliberately small. A two-question test rates each capability of a system by whether a human must accept its output and whether an error would be irreversible or material. Five operational control states cover both the model and the service around it. Thirty-six requirements in seven domains scale with consequence, so that a low-consequence system needs only eight. Fixed rules turn findings into one of three outcomes per capability (Ready, Ready with Conditions, Not Ready) without a numeric score, and were designed and checked so that two assessors reach the same decision from the same evidence.</p><p>Two ideas distinguish the framework: negative-space assurance, which requires monitoring of the path where AI output becomes action with no human looking, and boundary assurance, which examines the seams between organisational functions where controls are most often assumed rather than evidenced. OAAF complements ISO/IEC 42001, the NIST AI Risk Management Framework and the EU AI Act.</p><p>The record contains the framework (PDF and plain text), an assessment workbook, a machine-readable rules file (oaaf.json), and an open-format AI assistant skill that guides a user through an assessment and applies the decision rules.</p>",
+  "keywords": [
+    "AI assurance",
+    "operational assurance",
+    "AI safety management",
+    "post-deployment monitoring",
+    "post-market monitoring",
+    "AI governance",
+    "AI agents",
+    "agentic AI",
+    "human oversight",
+    "EU AI Act",
+    "ISO/IEC 42001",
+    "NIST AI RMF",
+    "safety management system"
+  ]
+}
