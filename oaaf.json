@@ -1,0 +1,590 @@
+{
+  "$comment": "Machine-readable summary of the Operational AI Assurance Framework (OAAF) v1.0. The full text (FRAMEWORK.md / PDF) is authoritative.",
+  "name": "Operational AI Assurance Framework",
+  "short_name": "OAAF",
+  "version": "1.0",
+  "date": "2026-11",
+  "author": "Armend Verbovci",
+  "licence": "CC-BY-4.0",
+  "summary": "A free, sector-neutral method for deciding, on evidence, whether a deployed AI system or AI agent should keep operating, be restricted, or be stopped, adapted from aviation safety management.",
+  "principles": [
+    "System of operation: assurance applies to the AI-enabled system as deployed and operated, not the model alone.",
+    "Context dependency: operational risk depends on context, not capability.",
+    "Proportionality: rigour scales with consequence.",
+    "Continuous, not one-off: assurance is maintained for the life of the system through continuous, periodic and event-triggered activity.",
+    "Assurance is not performance: good performance figures are not evidence that degradation would be noticed.",
+    "Acceptable, not absolute: the objective is acceptable operation within a defined context and risk tolerance.",
+    "Independence in proportion to risk.",
+    "Accountability requires authority: an owner who cannot restrict or stop the system is a control deficiency.",
+    "Negative-space assurance: assurance must cover what the system does not flag, escalate or surface."
+  ],
+  "capability_criticality": {
+    "q1": "Human acceptance: must a human positively accept this specific output before it takes effect? Visibility, sampling or after-the-fact intervention do not count.",
+    "q2": "Consequence: if the output is wrong, would the harm be irreversible before it would normally be detected, or exceed the materiality threshold? Judge reversibility of the consequence, not of the action.",
+    "default_materiality": "Where no threshold is set, any consequence that moves money, commits the organisation to a third party or communicates externally on its behalf is material.",
+    "rule": {
+      "q1_no_q2_yes": "High",
+      "q1_no_q2_no": "Medium",
+      "q1_yes_q2_yes": "Medium",
+      "q1_yes_q2_no": "Low"
+    },
+    "note": "An attribute used only to set the minimum tier and to rate findings. Not a second tier system."
+  },
+  "consequence_tiers": {
+    "1": {
+      "harm": "Minor financial or reputational",
+      "reversibility": "Easily reversed",
+      "autonomy": "Easily overridden",
+      "requirements_applying": 8
+    },
+    "2": {
+      "harm": "Operational disruption, material financial loss, recoverable harm to individuals",
+      "reversibility": "Reversible with effort",
+      "autonomy": "Meaningful autonomy with a human in the loop",
+      "requirements_applying": 25
+    },
+    "3": {
+      "harm": "Severe or irreversible harm to people, critical services or the organisation",
+      "reversibility": "Difficult or impossible to reverse",
+      "autonomy": "Limited or no practical override window",
+      "requirements_applying": 36
+    },
+    "rules": [
+      "The highest applicable factor governs.",
+      "A system with any High capability is at least Tier 2.",
+      "Regulatory classification is recorded separately as an overlay and does not set the tier."
+    ]
+  },
+  "control_states": [
+    {
+      "id": "S0",
+      "name": "Normal",
+      "meaning": "Operating within validated conditions",
+      "typical_authority": "Operating team"
+    },
+    {
+      "id": "S1",
+      "name": "Degraded",
+      "meaning": "Operating conditions or assurance margin deteriorated, within tolerance",
+      "typical_authority": "Operating team, owner informed"
+    },
+    {
+      "id": "S2",
+      "name": "Restricted",
+      "meaning": "Operation permitted only with added controls, such as human acceptance or reduced limits",
+      "typical_authority": "Accountable owner"
+    },
+    {
+      "id": "S3",
+      "name": "Contained",
+      "meaning": "Capability constrained, isolated or on fallback",
+      "typical_authority": "Accountable owner, management informed"
+    },
+    {
+      "id": "S4",
+      "name": "Unacceptable",
+      "meaning": "Continued operation exceeds accepted risk; stop the affected capability",
+      "typical_authority": "Accountable owner or anyone with stop authority"
+    }
+  ],
+  "control_state_notes": [
+    "States are defined for both model condition and service condition (availability, stale data, monitoring outage, dependency failure).",
+    "States apply per capability.",
+    "Leaving S3 or S4 requires return to service (P5-04)."
+  ],
+  "requirements": [
+    {
+      "id": "P1-01",
+      "domain_id": "P1",
+      "domain": "Accountability and authority",
+      "requirement": "A named individual is designated as accountable owner of the deployed system.",
+      "applies_from_tier": 1,
+      "control_critical": true,
+      "typical_evidence": [
+        "Appointment record",
+        "System Card"
+      ]
+    },
+    {
+      "id": "P1-02",
+      "domain_id": "P1",
+      "domain": "Accountability and authority",
+      "requirement": "Technical, risk and business responsibilities for the system are documented and assigned to named roles.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Responsibility matrix"
+      ]
+    },
+    {
+      "id": "P1-03",
+      "domain_id": "P1",
+      "domain": "Accountability and authority",
+      "requirement": "An escalation path from the accountable owner to senior management is documented.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Procedure",
+        "organisation chart"
+      ]
+    },
+    {
+      "id": "P1-04",
+      "domain_id": "P1",
+      "domain": "Accountability and authority",
+      "requirement": "An accountability statement sets out the responsibilities of suppliers, model providers and deployers.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Signed statement",
+        "contract clauses"
+      ]
+    },
+    {
+      "id": "P1-05",
+      "domain_id": "P1",
+      "domain": "Accountability and authority",
+      "requirement": "(a) The accountable owner holds documented authority to initiate restriction or stopping of any capability; and (b) a mechanism exists to execute it within a response time set for each capability, and it has been exercised within the review period.",
+      "applies_from_tier": 2,
+      "control_critical": true,
+      "typical_evidence": [
+        "Delegation of authority",
+        "runbook",
+        "test or exercise record"
+      ]
+    },
+    {
+      "id": "P2-01",
+      "domain_id": "P2",
+      "domain": "Context, hazards and risk",
+      "requirement": "Foreseeable misuse and credible failure modes relevant to the operating context are documented.",
+      "applies_from_tier": 1,
+      "control_critical": false,
+      "typical_evidence": [
+        "Hazard list on the System Card"
+      ]
+    },
+    {
+      "id": "P2-02",
+      "domain_id": "P2",
+      "domain": "Context, hazards and risk",
+      "requirement": "Structured hazard identification covers model, data, integration, infrastructure, human-factors and external-dependency failure modes, including hazards whose controls are owned by other functions (see the Boundary Rule, 7.2).",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Hazard log with owner and interface recorded for each hazard"
+      ]
+    },
+    {
+      "id": "P2-03",
+      "domain_id": "P2",
+      "domain": "Context, hazards and risk",
+      "requirement": "Risk is assessed using a documented method covering at least severity and likelihood, and where relevant detectability and control effectiveness.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Risk register",
+        "method statement"
+      ]
+    },
+    {
+      "id": "P2-04",
+      "domain_id": "P2",
+      "domain": "Context, hazards and risk",
+      "requirement": "The risk record is reviewed at a defined interval of no more than 12 months, and after every material change and every occurrence classed as Deviation or above.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Review records"
+      ]
+    },
+    {
+      "id": "P3-01",
+      "domain_id": "P3",
+      "domain": "Operational boundaries",
+      "requirement": "Conditions requiring restriction, containment or cessation of operation are documented and provided to the accountable owner.",
+      "applies_from_tier": 1,
+      "control_critical": true,
+      "typical_evidence": [
+        "Operating limits on the System Card"
+      ]
+    },
+    {
+      "id": "P3-02",
+      "domain_id": "P3",
+      "domain": "Operational boundaries",
+      "requirement": "Operational control states are defined for this system, covering both model condition and service condition, including fail-safe or fail-open behaviour when the AI is unavailable.",
+      "applies_from_tier": 2,
+      "control_critical": true,
+      "typical_evidence": [
+        "State definitions"
+      ]
+    },
+    {
+      "id": "P3-03",
+      "domain_id": "P3",
+      "domain": "Operational boundaries",
+      "requirement": "Measurable trigger conditions are defined for each transition between states.",
+      "applies_from_tier": 2,
+      "control_critical": true,
+      "typical_evidence": [
+        "Trigger table",
+        "alert configuration"
+      ]
+    },
+    {
+      "id": "P3-04",
+      "domain_id": "P3",
+      "domain": "Operational boundaries",
+      "requirement": "Decision authority is defined for each transition between states.",
+      "applies_from_tier": 3,
+      "control_critical": true,
+      "typical_evidence": [
+        "Authority table"
+      ]
+    },
+    {
+      "id": "P3-05",
+      "domain_id": "P3",
+      "domain": "Operational boundaries",
+      "requirement": "State transitions and their rationale are logged.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "State log"
+      ]
+    },
+    {
+      "id": "P3-06",
+      "domain_id": "P3",
+      "domain": "Operational boundaries",
+      "requirement": "The system's technical permissions in other systems are limited to the capabilities declared in the System Definition. Any further permission is removed, or declared and assessed.",
+      "applies_from_tier": 2,
+      "control_critical": true,
+      "typical_evidence": [
+        "Permission inventory compared with capability list"
+      ]
+    },
+    {
+      "id": "P4-01",
+      "domain_id": "P4",
+      "domain": "Continuous assurance",
+      "requirement": "Operational performance is monitored and reviewed by a named person at a defined interval.",
+      "applies_from_tier": 1,
+      "control_critical": true,
+      "typical_evidence": [
+        "Dashboard",
+        "review record"
+      ]
+    },
+    {
+      "id": "P4-02",
+      "domain_id": "P4",
+      "domain": "Continuous assurance",
+      "requirement": "Safety-relevant indicators are distinguished from general performance indicators.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Indicator list with classification"
+      ]
+    },
+    {
+      "id": "P4-03",
+      "domain_id": "P4",
+      "domain": "Continuous assurance",
+      "requirement": "Targets and trigger levels are defined for safety-relevant indicators and linked to the state triggers in P3-03.",
+      "applies_from_tier": 2,
+      "control_critical": true,
+      "typical_evidence": [
+        "Indicator specification"
+      ]
+    },
+    {
+      "id": "P4-04",
+      "domain_id": "P4",
+      "domain": "Continuous assurance",
+      "requirement": "Assurance coverage is reported using hazard-signal mapping: for each hazard in the risk record, whether an operational signal exists that would detect it before harm (full, partial or none), reported as three counts. Interim method; see 9.2.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Hazard-signal map"
+      ]
+    },
+    {
+      "id": "P4-05",
+      "domain_id": "P4",
+      "domain": "Continuous assurance",
+      "requirement": "Both leading indicators (conditions that precede harm) and lagging indicators (harm and near misses that occurred) are tracked at a defined interval.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Indicator reports"
+      ]
+    },
+    {
+      "id": "P4-06",
+      "domain_id": "P4",
+      "domain": "Continuous assurance",
+      "requirement": "For each High capability, monitoring covers the path where output became action with no human acceptance, using sampling, outcome tracking or independent checks.",
+      "applies_from_tier": 2,
+      "control_critical": true,
+      "typical_evidence": [
+        "Negative-space monitoring records"
+      ]
+    },
+    {
+      "id": "P5-01",
+      "domain_id": "P5",
+      "domain": "Occurrence and learning",
+      "requirement": "A channel exists for reporting problems with system output, and users and affected staff know how to use it.",
+      "applies_from_tier": 1,
+      "control_critical": false,
+      "typical_evidence": [
+        "Channel",
+        "reports received"
+      ]
+    },
+    {
+      "id": "P5-02",
+      "domain_id": "P5",
+      "domain": "Occurrence and learning",
+      "requirement": "Occurrences are classified using a taxonomy that distinguishes at least deviation, near miss and incident (see Annex F).",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Occurrence log"
+      ]
+    },
+    {
+      "id": "P5-03",
+      "domain_id": "P5",
+      "domain": "Occurrence and learning",
+      "requirement": "Occurrences classed as Deviation or above are investigated for cause, and corrective action is recorded.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Investigation reports",
+        "action log"
+      ]
+    },
+    {
+      "id": "P5-04",
+      "domain_id": "P5",
+      "domain": "Occurrence and learning",
+      "requirement": "A return-to-service process is defined and evidenced for any capability leaving S3 or S4.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Return-to-service records"
+      ]
+    },
+    {
+      "id": "P5-05",
+      "domain_id": "P5",
+      "domain": "Occurrence and learning",
+      "requirement": "Lessons from occurrences are fed into the risk record (P2) and the change process (P6).",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Traceable updates"
+      ]
+    },
+    {
+      "id": "P6-01",
+      "domain_id": "P6",
+      "domain": "Change assurance",
+      "requirement": "A configuration baseline is maintained that is sufficient to reconstruct the system that produced any given output: model and version, prompts and instructions, tools and the permissions they used, data and knowledge sources, persistent memory or context stores, and thresholds.",
+      "applies_from_tier": 1,
+      "control_critical": false,
+      "typical_evidence": [
+        "Configuration records",
+        "version history"
+      ]
+    },
+    {
+      "id": "P6-02",
+      "domain_id": "P6",
+      "domain": "Change assurance",
+      "requirement": "The operational significance of each change is assessed and recorded before release, judged by its potential effect on behaviour, boundaries, controls or risk, not by its technical size.",
+      "applies_from_tier": 1,
+      "control_critical": false,
+      "typical_evidence": [
+        "Change records"
+      ]
+    },
+    {
+      "id": "P6-03",
+      "domain_id": "P6",
+      "domain": "Change assurance",
+      "requirement": "Changes are classified by impact level (administrative, configuration, behavioural, functional, boundary, safety control), with evidence requirements that increase with impact.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Change procedure",
+        "classified changes"
+      ]
+    },
+    {
+      "id": "P6-04",
+      "domain_id": "P6",
+      "domain": "Change assurance",
+      "requirement": "Changes classed as behavioural or higher are re-assessed against the risk record and operational boundaries before release.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Re-assessment records"
+      ]
+    },
+    {
+      "id": "P6-05",
+      "domain_id": "P6",
+      "domain": "Change assurance",
+      "requirement": "External dependencies that can materially change system behaviour, including model providers and third-party data, are subject to change detection, version pinning, supplier notification, or evidenced compensating monitoring, in proportion to their significance.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Supplier terms",
+        "version pinning",
+        "drift monitoring"
+      ]
+    },
+    {
+      "id": "P7-01",
+      "domain_id": "P7",
+      "domain": "Human and AI operation",
+      "requirement": "Every human role that receives, accepts or acts on system output is identified.",
+      "applies_from_tier": 1,
+      "control_critical": false,
+      "typical_evidence": [
+        "Role list"
+      ]
+    },
+    {
+      "id": "P7-02",
+      "domain_id": "P7",
+      "domain": "Human and AI operation",
+      "requirement": "Risks of over-reliance and under-reliance are assessed for each such role.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Human factors assessment"
+      ]
+    },
+    {
+      "id": "P7-03",
+      "domain_id": "P7",
+      "domain": "Human and AI operation",
+      "requirement": "Escalation authority and criteria are documented for each such role.",
+      "applies_from_tier": 2,
+      "control_critical": false,
+      "typical_evidence": [
+        "Procedure"
+      ]
+    },
+    {
+      "id": "P7-04",
+      "domain_id": "P7",
+      "domain": "Human and AI operation",
+      "requirement": "Competency requirements are defined and current for everyone holding intervention authority.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Training and competency records"
+      ]
+    },
+    {
+      "id": "P7-05",
+      "domain_id": "P7",
+      "domain": "Human and AI operation",
+      "requirement": "Degradation of oversight effectiveness is assessed, including workload, alert saturation, complacency and incentives that discourage challenge.",
+      "applies_from_tier": 3,
+      "control_critical": false,
+      "typical_evidence": [
+        "Assessment",
+        "workload data"
+      ]
+    }
+  ],
+  "assessment_values": {
+    "Compliant": "Defined, in use, and a record shows it operating within the review period. At Tier 1, defined and in use is sufficient.",
+    "Partially Compliant": "Defined but incomplete, inconsistently applied, or no record of operation.",
+    "Not Demonstrated": "Evidence insufficient to establish that the control is defined and in use. Does not mean it does not exist.",
+    "Not Applicable": "Requirement is above the system's Consequence Tier."
+  },
+  "review_period": "12 months, or the time since the last material change, whichever is shorter.",
+  "evidence_rules": [
+    {
+      "id": "Rule 1",
+      "name": "Evidenced, not assumed",
+      "text": "A control owned by another function counts only if evidenced against this system: a named owner, a record the assessor has seen, and a demonstrated link to this system's decision path. An assumed control is Not Demonstrated."
+    },
+    {
+      "id": "Rule 2",
+      "name": "Absence of harm is not evidence",
+      "text": "A clean incident record does not downgrade an unassessed risk, and is not evidence of control effectiveness where monitoring that would detect the harm is absent or of unknown coverage."
+    },
+    {
+      "id": "Rule 3",
+      "name": "Boundary Rule",
+      "text": "A hazard that can affect a capability's decision path must be recorded even when its control is owned by another function, naming the owning function and the interface."
+    }
+  ],
+  "finding_criticality": {
+    "applies_to": "Every Partially Compliant or Not Demonstrated result, rated separately for each capability it affects.",
+    "table": {
+      "control_critical": {
+        "High": "Critical",
+        "Medium": "Significant",
+        "Low": "Routine"
+      },
+      "other": {
+        "High": "Significant",
+        "Medium": "Significant",
+        "Low": "Routine"
+      }
+    },
+    "adjustment": "May be raised one level with written reasons; never lowered. Three levels only; no numeric score."
+  },
+  "decision": {
+    "scope": "Per capability",
+    "outcomes": {
+      "Not Ready": "Any open Critical finding",
+      "Ready with Conditions": "Significant findings, or Critical findings cleared by evidenced compensating control or time-limited risk acceptance, and no open Critical",
+      "Ready": "Routine findings only, or none"
+    },
+    "clearing_critical": [
+      "An evidenced compensating control (Rule 1)",
+      "A documented, time-limited risk acceptance signed by someone holding authority under P1-05(a) to stop that capability"
+    ],
+    "not_ready_in_operation": "Move the capability to S2 Restricted or S3 Contained until cleared."
+  },
+  "assessment_triggers": [
+    "Before first operation",
+    "Periodic review, at least every 12 months",
+    "Change classed as behavioural or higher",
+    "Before leaving S3 or S4",
+    "Proposal to retire, or capability no longer meets its purpose"
+  ],
+  "operating_loop": [
+    "Define",
+    "Assess",
+    "Bound",
+    "Monitor",
+    "Detect",
+    "Intervene",
+    "Report",
+    "Investigate",
+    "Correct",
+    "Verify",
+    "Return, Restrict or Retire",
+    "Learn"
+  ],
+  "occurrence_classes": [
+    "Observation",
+    "Unsafe condition",
+    "Deviation",
+    "Near miss",
+    "Incident",
+    "Serious incident"
+  ]
+}

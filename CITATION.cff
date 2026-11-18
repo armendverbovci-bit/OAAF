@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+message: "If you use this framework, please cite it as below."
+type: dataset
+title: "Operational AI Assurance Framework (OAAF)"
+version: "1.0"
+date-released: 2026-11-18
+authors:
+  - family-names: Verbovci
+    given-names: Armend
+    email: armendverbovci@gmail.com
+license: CC-BY-4.0
+abstract: >-
+  A free, sector-neutral method for deciding, on evidence, whether a deployed
+  AI system or AI agent should keep operating, be restricted, or be stopped,
+  adapted from aviation safety management. A two-question test rates each
+  capability of a system; five operational control states cover both the model
+  and the service around it; 36 requirements in seven domains scale with
+  consequence (8 apply to low-consequence systems); and fixed rules turn
+  findings into Ready, Ready with Conditions or Not Ready per capability,
+  without a numeric score. Includes templates, worked examples including an AI
+  agent, a mapping to ISO/IEC 42001, the NIST AI RMF and the EU AI Act, an
+  assessment workbook, a machine-readable rules file and an AI assistant skill.
+keywords:
+  - AI assurance
+  - operational assurance
+  - AI safety management
+  - post-deployment monitoring
+  - post-market monitoring
+  - AI governance
+  - AI agents
+  - agentic AI
+  - human oversight
+  - EU AI Act
+  - ISO/IEC 42001
+  - NIST AI RMF
+  - safety management system
+preferred-citation:
+  type: report
+  title: "Operational AI Assurance Framework (OAAF), Version 1.0"
+  authors:
+    - family-names: Verbovci
+      given-names: Armend
+  year: 2026
+  month: 11
+  license: CC-BY-4.0
