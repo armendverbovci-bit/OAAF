@@ -20,10 +20,11 @@ Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)
 | Author | Armend Verbovci |
 | Contact | armendverbovci@gmail.com |
 | Companion files | Assessment workbook, plain-text version, machine-readable data file (oaaf.json) and an AI assistant skill for running an assessment, published with this document. |
+| DOI | https://doi.org/10.5281/zenodo.24352952 |
 | Licence | CC BY 4.0. You may copy, adapt and use this framework, including commercially, provided you credit the author. |
 | Status | Published method for use and comment. Not a standard, certification scheme or legal guidance. |
 
-**Suggested citation.** Verbovci, A. (2026). *Operational AI Assurance Framework (OAAF), Version 1.0.* Zenodo.
+**Suggested citation.** Verbovci, A. (2026). *Operational AI Assurance Framework (OAAF), Version 1.0.* Zenodo. https://doi.org/10.5281/zenodo.24352952
 
 **Statement of independence.** This framework was developed by the author in a personal capacity, in his own time, from public standards, published literature and general professional knowledge. It does not use, describe or represent the material, systems, data or views of any employer, client or regulator. All worked examples are synthetic.
 

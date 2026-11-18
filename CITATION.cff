@@ -9,6 +9,9 @@ authors:
     given-names: Armend
     email: armendverbovci@gmail.com
 license: CC-BY-4.0
+doi: 10.5281/zenodo.24352952
+repository-code: "https://github.com/armendverbovci-bit/OAAF"
+url: "https://armendverbovci-bit.github.io/OAAF/"
 abstract: >-
   A free, sector-neutral method for deciding, on evidence, whether a deployed
   AI system or AI agent should keep operating, be restricted, or be stopped,
@@ -42,4 +45,7 @@ preferred-citation:
       given-names: Armend
   year: 2026
   month: 11
+  doi: 10.5281/zenodo.24352952
+  publisher:
+    name: Zenodo
   license: CC-BY-4.0

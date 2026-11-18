@@ -1,6 +1,6 @@
 # Operational AI Assurance Framework (OAAF)
 
-> A free, sector-neutral method for deciding, on evidence, whether a deployed AI system or AI agent should keep operating, be restricted, or be stopped. Adapted from aviation safety management. Version 1.0, November 2026, by Armend Verbovci. Licensed CC BY 4.0.
+> A free, sector-neutral method for deciding, on evidence, whether a deployed AI system or AI agent should keep operating, be restricted, or be stopped. Adapted from aviation safety management. Version 1.0, November 2026, by Armend Verbovci. Licensed CC BY 4.0. DOI: https://doi.org/10.5281/zenodo.24352952
 
 OAAF rates each capability of an AI system with two questions (does a human positively accept the output; would an error be irreversible before detection or above a materiality threshold), sets a Consequence Tier (Tier 1: 8 requirements, Tier 2: 25, Tier 3: 36), defines five control states (S0 Normal to S4 Unacceptable), and applies fixed rules that give each capability one of three outcomes: Ready, Ready with Conditions, or Not Ready. There is no numeric score. It complements ISO/IEC 42001, the NIST AI RMF and the EU AI Act (Articles 14, 26, 72, 73) and does not by itself establish compliance.
 

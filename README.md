@@ -2,6 +2,8 @@
 
 **OAAF is a free, sector-neutral method for deciding, on evidence, whether a deployed AI system or AI agent should keep operating, be restricted, or be stopped. It is adapted from aviation safety management.**
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24352952.svg)](https://doi.org/10.5281/zenodo.24352952)
+
 Version 1.0, November 2026 · Author: Armend Verbovci · Licence: [CC BY 4.0](LICENSE) (free to use and adapt, including commercially, with credit)
 
 | Read | Use | Automate |
@@ -75,7 +77,9 @@ Version 1.0 is a published method for use and comment. The worked examples are s
 
 ## Cite
 
-Verbovci, A. (2026). *Operational AI Assurance Framework (OAAF), Version 1.0.* See [CITATION.cff](CITATION.cff).
+Verbovci, A. (2026). *Operational AI Assurance Framework (OAAF), Version 1.0.* Zenodo. https://doi.org/10.5281/zenodo.24352952
+
+See also [CITATION.cff](CITATION.cff).
 
 ## Contact
 
