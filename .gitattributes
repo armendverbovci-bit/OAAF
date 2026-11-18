@@ -1,0 +1,2 @@
+# Exclude the small helper script from language statistics: this is a framework, not a software project
+*.py linguist-documentation
